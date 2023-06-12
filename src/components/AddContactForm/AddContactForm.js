@@ -15,6 +15,7 @@ class AddContactForm extends Component {
         const {name, value} = e.currentTarget;
         this.setState({ [name]: value });
     }
+    
     handleOnSubmit = e => {
         e.preventDefault();
         this.props.onSubmit(this.state);
