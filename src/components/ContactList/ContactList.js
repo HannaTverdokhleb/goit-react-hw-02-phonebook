@@ -1,5 +1,4 @@
 import ContactListItem from 'components/ContactListItem/ContactListItem';
-import shortid from 'shortid';
 import PropTypes from 'prop-types';
 import style from 'components/ContactList/ContactList.module.css'
 
@@ -10,9 +9,8 @@ const ContactList = ({contacts, searchValue, deleteContact}) => {
             contacts && contacts
             .filter((el) => el.name.toLowerCase().includes(searchValue.toLowerCase())) 
             .map(contact => {
-                let contactId = shortid.generate();
                 return (
-                    <ContactListItem key={contactId} contact={contact} deleteContact={deleteContact} />
+                    <ContactListItem key={contact.id} contact={contact} deleteContact={deleteContact} />
                 )
             })}
             

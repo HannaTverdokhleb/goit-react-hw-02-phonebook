@@ -1,11 +1,9 @@
 import style from 'components/ContactListItem/ContactListItem.module.css';
-import shortid from 'shortid';
 import PropTypes from 'prop-types';
 
 const ContactListItem = ({contact, deleteContact}) => {
-    let contactId = shortid.generate();
     return (
-        <li key={contactId} className={style.listItem}>
+        <li key={contact.id} className={style.listItem}>
             {contact.name}: {contact.number}
             <button value={contact.name} onClick={deleteContact} className={style.listButtton}>Delete</button>
         </li>

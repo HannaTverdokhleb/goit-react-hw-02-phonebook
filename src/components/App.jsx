@@ -1,4 +1,5 @@
 import {Component} from 'react';
+import shortid from 'shortid';
 import AddContactForm from 'components/AddContactForm/AddContactForm';
 import ContactList from 'components/ContactList/ContactList';
 import SearchFilter from 'components/SearchFilter/SearchFilter';
@@ -14,19 +15,24 @@ class App extends Component {
     filter: ''
   }
 
-  formSubmitHandler = (data) => {
-    for (let i=0; i<this.state.contacts.length; i++) {
-      if (this.state.contacts[i].name === data.name) {
-        alert(data.name + " is allready in contacts" );
-        return
-      }
+  formSubmitHandler = ({name, number}) => {
+    let isExist = this.state.contacts.find(contact => name === contact.name);
+    if (isExist) {
+      alert(name + " is allready in contacts");
+      return
     }
-    this.setState((prevState) => ({ contacts:  prevState.contacts.concat(data) }));
+
+    let newContact = {
+      id: shortid.generate(),
+      name,
+      number
+    };
+    this.setState({ contacts:  [...this.state.contacts, newContact] });
+    
   }
 
   searchHandler = (query) => {
-    let result = (query ? query : "")
-    this.setState({ filter: result })
+    this.setState({ filter: query })
   }
 
   deleteHandler = (e) => {
